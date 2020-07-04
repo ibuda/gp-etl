@@ -1,1 +1,5 @@
 notebooks/
+logs/
+data/
+assets/
+__pycache__/
