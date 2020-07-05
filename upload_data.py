@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import pymongo
 import json
 from logger import logger
@@ -44,6 +45,9 @@ def insert_data(file, db, collection, creds, replace=False):
     
     col = mydb[collection]
     data = pd.read_csv(file)
+    data = data.replace({np.nan: None})
+    # converting string to datetime
+    
     LOGGER.info(f'Inserting data of shape {data.shape} to {collection}')
     recs = data.reset_index(drop=True).to_dict('records')
 
