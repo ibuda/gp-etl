@@ -3,3 +3,5 @@ logs/
 data/
 assets/
 __pycache__/
+.deployment
+settings.json
