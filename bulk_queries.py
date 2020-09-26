@@ -48,11 +48,12 @@ class BulkQueries(object):
 
         for row in self.insert_rows:
             values += generate_insert_values([*row.values()])
-        
+
 #         print(f'Values to be inserted:\n{values}')
 
-        buffer = StringIO(values)        
-        cursor.copy_from(buffer, self.table, sep=chr(29), columns=self.columns, null='None')
+        buffer = StringIO(values)
+        cursor.copy_from(buffer, self.table, sep=chr(
+            29), columns=self.columns, null='None')
 
     @py_cursor
     def run_updates(self, cursor=None):
@@ -72,7 +73,7 @@ class BulkQueries(object):
             setters = generate_update_setters([*row])
 
             query = f'UPDATE {self.table} SET {setters} WHERE {record_id_col} = %s;'
-            
+
 #             print(f'Update query: {query}')
 #             print(f'Update values: {values}')
 
