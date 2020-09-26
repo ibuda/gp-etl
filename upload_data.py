@@ -37,17 +37,17 @@ def insert_data(file, db, collection, creds, replace=False):
     myclient = pymongo.MongoClient(creds)
     mydb = myclient[db]
     collections = mydb.list_collection_names()
-    
+
     if replace and collection in collections:
         LOGGER.info(f'Dropping collection {collection}')
         drop_col = mydb[collection]
         drop_col.drop()
-    
+
     col = mydb[collection]
     data = pd.read_csv(file)
     data = data.replace({np.nan: None})
     # converting string to datetime
-    
+
     LOGGER.info(f'Inserting data of shape {data.shape} to {collection}')
     recs = data.reset_index(drop=True).to_dict('records')
 
@@ -73,7 +73,7 @@ def run_all():
     status = True
     for file, collection in zip(files, collections):
         LOGGER.info(f'Running insert job for colleciton: {collection}')
-        ok = insert_data(file, 'kesha', collection, creds,replace=True)
+        ok = insert_data(file, 'kesha', collection, creds, replace=True)
         status &= ok
 
     LOGGER.info(f'All jobs finished successfully: {status}')
