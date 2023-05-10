@@ -3,7 +3,7 @@ pandas
 sqlalchemy
 psycopg2-binary
 numpy
-Flask==1.0.2
+Flask
 Flask-APScheduler
 applicationinsights
 dnspython
